@@ -32,15 +32,7 @@ public class Settings extends Activity {
 
     static final int PORT = 31292;
 
-    private boolean serve;
-
-    private ServerSocket server;
-
-    private int bars = -1;
-
     private WifiManager wifii;
-
-    private PhoneStateListener p;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -107,55 +99,6 @@ public class Settings extends Activity {
 
     }
     
-    @Override
-    protected void onResume() {
-        super.onResume();
-        
-//        p = new PhoneStateListener() {
-//
-//            @Override
-//            public void onSignalStrengthsChanged(SignalStrength signalStrength) {
-//                super.onSignalStrengthsChanged(signalStrength);
-//                Log.d("", "sig: " + signalStrength.getGsmSignalStrength());
-//                bars = toBars(signalStrength.getGsmSignalStrength());
-//            }
-//        };
-//        ((TelephonyManager) getSystemService(TELEPHONY_SERVICE)).listen(p, PhoneStateListener.LISTEN_SIGNAL_STRENGTHS);
-//
-//        new Thread(new Runnable() {
-//            public void run() {
-//                try {
-//                    signalStrenthServerLoop();
-//                } catch (Exception e) {
-//                    // TODO Auto-generated catch block
-//                    e.printStackTrace();
-//                }
-//            };
-//        }).start();
-
-    }
-
-    @Override
-    protected void onPause() {
-        super.onPause();
-//        serve = false;
-//        try {
-//            server.close();
-//        } catch (IOException e) {
-//        }
-//        ((TelephonyManager) getSystemService(TELEPHONY_SERVICE)).listen(p, PhoneStateListener.LISTEN_NONE);
-    }
-
-    private void signalStrenthServerLoop() throws Exception {
-        serve = true;
-        server = new ServerSocket(PORT);
-        while (serve) {
-            Socket sock = server.accept();
-            OutputStream out = sock.getOutputStream();
-            out.write(new JSONStringer().object().key("bars").value(bars).endObject().toString().getBytes("UTF-8"));
-            out.close();
-        }
-    }
 
     public String intToIp(int i) {
 

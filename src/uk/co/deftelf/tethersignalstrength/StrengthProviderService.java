@@ -46,26 +46,6 @@ public class StrengthProviderService extends Service {
 
     private PhoneStateListener p;
 
-    // private BroadcastReceiver networkChange = new BroadcastReceiver() {
-    //
-    // @Override
-    // public void onReceive(Context context, Intent intent) {
-    // super.onReceive(context, intent);
-    // Log.d("app","Network connectivity change");
-    // if(intent.getExtras()!=null) {
-    // NetworkInfo ni=(NetworkInfo)
-    // intent.getExtras().get(ConnectivityManager.EXTRA_NETWORK_INFO);
-    // if(ni!=null && ni.getState()==NetworkInfo.State.CONNECTED) {
-    // Log.i("app","Network "+ni.getTypeName()+" connected");
-    // }
-    // }
-    // if(intent.getExtras().getBoolean(ConnectivityManager.EXTRA_NO_CONNECTIVITY,Boolean.FALSE))
-    // {
-    // XLog.d("app","There's no network connectivity");
-    // }
-    // }
-    // };
-
     @Override
     public IBinder onBind(Intent arg0) {
         return null;
@@ -87,18 +67,6 @@ public class StrengthProviderService extends Service {
 
         wifii = (WifiManager) getSystemService(Context.WIFI_SERVICE);
         DhcpInfo d = wifii.getDhcpInfo();
-        //
-        // String s_dns1 = "DNS 1: " + intToIp(d.dns1);
-        // String s_dns2 = "DNS 2: " + intToIp(d.dns2);
-        // String s_gateway = "Default Gateway: " + intToIp(d.gateway);
-        // String s_ipAddress = "IP Address: " + intToIp(d.ipAddress);
-        // String s_leaseDuration = "Lease Time: " + d.leaseDuration;
-        // String s_netmask = "Subnet Mask: " + intToIp(d.netmask);
-        // String s_serverAddress = "Server IP: " + intToIp(d.serverAddress);
-        //
-        // Log.d("", "Network Info\n" + s_dns1 + "\n" + s_dns2 + "\n" +
-        // s_gateway + "\n" + s_ipAddress + "\n"
-        // + s_leaseDuration + "\n" + s_netmask + "\n" + s_serverAddress);
 
         p = new PhoneStateListener() {
 
@@ -138,33 +106,6 @@ public class StrengthProviderService extends Service {
         return START_STICKY;
     }
 
-    // new Thread(new Runnable() {
-    //
-    // public void run() {
-    // DhcpInfo d = wifii.getDhcpInfo();
-    // try {
-    //
-    // Socket getSock = new Socket();
-    // getSock.connect(new InetSocketAddress(intToIp(d.gateway), PORT), 2000);
-    // InputStream is = getSock.getInputStream();
-    // String stuff = new Scanner(is).useDelimiter("\\A").next();
-    // JSONObject info = new JSONObject(stuff);
-    // final int gotBars = info.getInt("bars");
-    // is.close();
-    // } catch (final Exception e) {
-    // e.printStackTrace();
-    // runOnUiThread(new Runnable() {
-    //
-    // public void run() {
-    // ((TextView) findViewById(R.id.textView1)).setText(e.getMessage());
-    // }
-    // });
-    // }
-    // }
-    // }).start();
-    // }
-    //
-
     @Override
     public void onDestroy() {
         stop();
@@ -173,13 +114,14 @@ public class StrengthProviderService extends Service {
     }
 
     private void stop() {
+
+        ((TelephonyManager) getSystemService(TELEPHONY_SERVICE)).listen(p, PhoneStateListener.LISTEN_NONE);
         serve = false;
         try {
             if (server != null)
                 server.close();
         } catch (IOException e) {
         }
-        ((TelephonyManager) getSystemService(TELEPHONY_SERVICE)).listen(p, PhoneStateListener.LISTEN_NONE);
     }
 
     private void signalStrenthServerLoop() throws Exception {
