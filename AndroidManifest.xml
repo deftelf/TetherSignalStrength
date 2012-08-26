@@ -27,11 +27,12 @@
             </intent-filter>
         </activity>
 
+        <!-- 
         <receiver android:name=".StartupReceiver" >
             <intent-filter>
                 <action android:name="android.net.conn.CONNECTIVITY_CHANGE" />
             </intent-filter>
-        </receiver>
+        </receiver> -->
         
         <service
             android:name=".StrengthProviderService"            ></service>

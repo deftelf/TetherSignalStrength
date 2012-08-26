@@ -13,7 +13,7 @@ public class StartupReceiver extends BroadcastReceiver {
     public void onReceive(Context context, Intent intent) {
         Log.d("app","Network connectivity change");
         
-        context.startService(new Intent(context, StrengthProviderService.class));
+//        context.startService(new Intent(context, StrengthProviderService.class));
 
     }
 
