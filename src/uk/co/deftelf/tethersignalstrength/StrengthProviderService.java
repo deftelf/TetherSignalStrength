@@ -56,12 +56,12 @@ public class StrengthProviderService extends Service {
         super.onStartCommand(intent, flags, startId);
 
         
-        ConnectivityManager conMan = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
-        if (conMan.getActiveNetworkInfo() == null
-                || (!conMan.getActiveNetworkInfo().isConnectedOrConnecting() && conMan.getActiveNetworkInfo().getType() == ConnectivityManager.TYPE_MOBILE)) {
-            stopSelf();
-            return START_NOT_STICKY;
-        }
+//        ConnectivityManager conMan = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
+//        if (conMan.getActiveNetworkInfo() == null
+//                || (!conMan.getActiveNetworkInfo().isConnectedOrConnecting() && conMan.getActiveNetworkInfo().getType() == ConnectivityManager.TYPE_MOBILE)) {
+//            stopSelf();
+//            return START_NOT_STICKY;
+//        }
 
         stop();
 
@@ -102,12 +102,15 @@ public class StrengthProviderService extends Service {
         PendingIntent click = PendingIntent.getActivity(this, 0, new Intent(this, Settings.class), 0);
         note.setLatestEventInfo(this, "Tether strength server", "Tether strength server", click);
         startForeground(1, note);
+        
+        Log.d(this.getClass().toString(), "onStartCommand " + intent + " " + flags);
 
-        return START_STICKY;
+        return START_NOT_STICKY;
     }
 
     @Override
     public void onDestroy() {
+        Log.d(this.getClass().toString(), "onDestroy ");
         stop();
         stopForeground(true);
         super.onDestroy();

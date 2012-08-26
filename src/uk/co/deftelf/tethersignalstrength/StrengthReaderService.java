@@ -24,6 +24,7 @@ import android.net.DhcpInfo;
 import android.net.wifi.WifiManager;
 import android.os.IBinder;
 import android.telephony.TelephonyManager;
+import android.util.Log;
 import android.widget.TextView;
 
 public class StrengthReaderService extends Service {
@@ -41,6 +42,8 @@ public class StrengthReaderService extends Service {
     private UpdateThread checker;
 
     private Socket getSock;
+
+    private PendingIntent click;
 
     class UpdateThread extends Thread {
         boolean check = true;
@@ -114,7 +117,7 @@ public class StrengthReaderService extends Service {
 
         noteMan = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
         note = new Notification(R.drawable.ic_launcher, "", 0);
-        PendingIntent click = PendingIntent.getActivity(this, 0, new Intent(this, Settings.class), 0);
+        click = PendingIntent.getActivity(this, 0, new Intent(this, Settings.class), 0);
         note.setLatestEventInfo(this, "Tethered signal strength", "Waiting", click);
         note.defaults = 0;
         
@@ -138,12 +141,15 @@ public class StrengthReaderService extends Service {
         registerReceiver(screenRx, filter);
 
         startUpdater();
+        
+        Log.d(this.getClass().toString(), "onStartCommand " + intent + " " + flags);
 
         return START_NOT_STICKY;
     }
 
     @Override
     public void onDestroy() {
+        Log.d(this.getClass().toString(), "onDestroy ");
         stopUpdater();
         stopForeground(true);
         unregisterReceiver(screenRx);
@@ -246,7 +252,7 @@ public class StrengthReaderService extends Service {
 
         String message = "Tethered phone bars=" + gotBars + "/4 on " + typeName;
         note.when = System.currentTimeMillis();
-        note.setLatestEventInfo(this, "Tethered signal strength", message, null);
+        note.setLatestEventInfo(this, "Tethered signal strength", message, click);
         note.icon = icon;
         noteMan.notify(1, note);
     }
