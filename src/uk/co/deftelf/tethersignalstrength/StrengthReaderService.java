@@ -212,8 +212,10 @@ public class StrengthReaderService extends Service {
             typeName = "EDGE";
             break; // ~ 50-100 kbps
         case TelephonyManager.NETWORK_TYPE_EVDO_0:
+            typeName = "EVDO rev 0";
+            break; // ~ 50-100 kbps
         case TelephonyManager.NETWORK_TYPE_EVDO_A:
-            typeName = "EVDO";
+            typeName = "EVDO rev A";
             break; // ~ 50-100 kbps
         case TelephonyManager.NETWORK_TYPE_GPRS:
             typeName = "GPRS";
@@ -231,19 +233,19 @@ public class StrengthReaderService extends Service {
             typeName = "UMTS";
             break; // ~ 400-7000 kbps
         // NOT AVAILABLE YET IN API LEVEL 7
-        case TelephonyManager.NETWORK_TYPE_EHRPD:
-            typeName = "EHRPD";
+        case TelephonyManagerCompat.NETWORK_TYPE_EHRPD:
+            typeName = "eHRPD";
             break; // ~ 1-2 Mbps
-        case TelephonyManager.NETWORK_TYPE_EVDO_B:
-            typeName = "EVDO-B";
+        case TelephonyManagerCompat.NETWORK_TYPE_EVDO_B:
+            typeName = "EVDO rev B";
             break; // ~ 5 Mbps
-        case TelephonyManager.NETWORK_TYPE_HSPAP:
-            typeName = "HSPAP";
+        case TelephonyManagerCompat.NETWORK_TYPE_HSPAP:
+            typeName = "HSPA+";
             break; // ~ 10-20 Mbps
-        case TelephonyManager.NETWORK_TYPE_IDEN:
-            typeName = "IDEN";
+        case TelephonyManagerCompat.NETWORK_TYPE_IDEN:
+            typeName = "iDen";
             break; // ~25 kbps 
-        case TelephonyManager.NETWORK_TYPE_LTE:
+        case TelephonyManagerCompat.NETWORK_TYPE_LTE:
             typeName = "LTE";
             break; // ~ 10+ Mbps
         default:
