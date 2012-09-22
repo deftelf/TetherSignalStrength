@@ -4,33 +4,39 @@
     android:layout_height="match_parent"
     android:orientation="vertical" >
 
+    <TextView android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Phone (device with the internet):" />
+    
     <Button
-        android:id="@+id/button1"
+        android:id="@+id/startProvider"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Start provider server" />
-    
-    <Button
-        android:id="@+id/button2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Stop provider server" />
 
-    <Button
-        android:id="@+id/button3"
-        android:layout_width="wrap_content"
+    <View android:layout_width="fill_parent"
+        android:layout_height="1dp"
+        />
+    
+    <TextView android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Start reader server" />
+        android:text="Tablet (device to tether):" />
     
     <Button
-        android:id="@+id/button4"
+        android:id="@+id/startReader"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Stop reader server" />
+        android:text="Start reader notification" />
     
-    <TextView
-        android:id="@+id/textView1"
+    <View android:layout_width="fill_parent"
+        android:layout_height="1dp"
+        />
+    
+    <Button
+        android:id="@+id/stop"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        android:text="Stop" />
+    
 
 </LinearLayout>

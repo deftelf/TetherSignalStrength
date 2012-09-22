@@ -55,7 +55,7 @@ public class Settings extends Activity {
         setContentView(R.layout.settings);
 
         
-        findViewById(R.id.button1).setOnClickListener(new OnClickListener() {
+        findViewById(R.id.startProvider).setOnClickListener(new OnClickListener() {
 
             public void onClick(View v) {
                 
@@ -66,17 +66,8 @@ public class Settings extends Activity {
 
         });
         
-        findViewById(R.id.button2).setOnClickListener(new OnClickListener() {
 
-            public void onClick(View v) {
-                
-                stopService(new Intent(Settings.this, StrengthProviderService.class));
-            }
-
-        });
-        
-        
-        findViewById(R.id.button3).setOnClickListener(new OnClickListener() {
+        findViewById(R.id.startReader).setOnClickListener(new OnClickListener() {
 
             public void onClick(View v) {
 
@@ -86,19 +77,20 @@ public class Settings extends Activity {
 
         });
         
-        findViewById(R.id.button4).setOnClickListener(new OnClickListener() {
+        findViewById(R.id.stop).setOnClickListener(new OnClickListener() {
 
             public void onClick(View v) {
 
                 stopService(new Intent(Settings.this, StrengthReaderService.class));
+                stopService(new Intent(Settings.this, StrengthProviderService.class));
             }
 
         });
         
+        
 
 
     }
-    
 
     public String intToIp(int i) {
 
