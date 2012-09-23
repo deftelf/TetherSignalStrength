@@ -29,6 +29,10 @@ import android.widget.TextView;
 
 public class StrengthReaderService extends Service {
 
+    enum SignalSpeed {
+        H,U,_3,G,L;
+    }
+    
     private WifiManager wifii;
 
     private BroadcastReceiver screenRx;
@@ -44,6 +48,8 @@ public class StrengthReaderService extends Service {
     private Socket getSock;
 
     private PendingIntent click;
+    
+    
 
     class UpdateThread extends Thread {
         boolean check = true;
@@ -178,78 +184,178 @@ public class StrengthReaderService extends Service {
     }
 
     private void putNotif(int gotBars, int type) {
-        int icon;
-        switch (gotBars) {
-        case 1:
-            icon = R.drawable.ic_bar1;
-            break;
-        case 2:
-            icon = R.drawable.ic_bar2;
-            break;
-        case 3:
-            icon = R.drawable.ic_bar3;
-            break;
-        case 4:
-            icon = R.drawable.ic_bar4;
-            break;
-        case 0:
-            icon = R.drawable.ic_bar0;
-            break;
-        default:
-            icon = R.drawable.ic_launcher;
-            break;
-        }
         
+        
+        SignalSpeed speed;
         String typeName;
         switch (type) {
         case TelephonyManager.NETWORK_TYPE_1xRTT:
             typeName = "1xRTT";
+            speed = SignalSpeed.G;
             break; // ~ 50-100 kbps // ~ 50-100 kbps
         case TelephonyManager.NETWORK_TYPE_CDMA:
             typeName = "CDMA";
+            speed = SignalSpeed.G;
             break; // ~ 50-100 kbps // ~ 14-64 kbps
         case TelephonyManager.NETWORK_TYPE_EDGE:
             typeName = "EDGE";
+            speed = SignalSpeed.G;
             break; // ~ 50-100 kbps
         case TelephonyManager.NETWORK_TYPE_EVDO_0:
             typeName = "EVDO rev 0";
+            speed = SignalSpeed.G;
             break; // ~ 50-100 kbps
         case TelephonyManager.NETWORK_TYPE_EVDO_A:
             typeName = "EVDO rev A";
+            speed = SignalSpeed.G;
             break; // ~ 50-100 kbps
         case TelephonyManager.NETWORK_TYPE_GPRS:
             typeName = "GPRS";
+            speed = SignalSpeed.G;
             break;
         case TelephonyManager.NETWORK_TYPE_HSDPA:
             typeName = "HSDPA";
+            speed = SignalSpeed.H;
             break;// ~ 2-14 Mbps
         case TelephonyManager.NETWORK_TYPE_HSPA:
             typeName = "HSPA";
+            speed = SignalSpeed._3;
             break;// ~ 700-1700 kbps
         case TelephonyManager.NETWORK_TYPE_HSUPA:
             typeName = "HSUPA";
+            speed = SignalSpeed.H;
             break; // ~ 1-23 Mbps
         case TelephonyManager.NETWORK_TYPE_UMTS:
             typeName = "UMTS";
+            speed = SignalSpeed._3;
             break; // ~ 400-7000 kbps
         // NOT AVAILABLE YET IN API LEVEL 7
         case TelephonyManagerCompat.NETWORK_TYPE_EHRPD:
             typeName = "eHRPD";
+            speed = SignalSpeed._3;
             break; // ~ 1-2 Mbps
         case TelephonyManagerCompat.NETWORK_TYPE_EVDO_B:
             typeName = "EVDO rev B";
+            speed = SignalSpeed._3;
             break; // ~ 5 Mbps
         case TelephonyManagerCompat.NETWORK_TYPE_HSPAP:
             typeName = "HSPA+";
+            speed = SignalSpeed.H;
             break; // ~ 10-20 Mbps
         case TelephonyManagerCompat.NETWORK_TYPE_IDEN:
             typeName = "iDen";
+            speed = SignalSpeed.G;
             break; // ~25 kbps 
         case TelephonyManagerCompat.NETWORK_TYPE_LTE:
             typeName = "LTE";
+            speed = SignalSpeed.L;
             break; // ~ 10+ Mbps
         default:
+            speed = SignalSpeed.U;
             typeName = "Unknown";
+        }
+        
+        int icon;
+        switch (gotBars) {
+        case 0:
+            switch(speed) {
+            case G:
+                icon = R.drawable.ic_sig_g_0;
+                break;
+            case _3:
+                icon = R.drawable.ic_sig_3_0;
+                break;
+            case H:
+                icon = R.drawable.ic_sig_h_0;
+                break;
+            case L:
+                icon = R.drawable.ic_sig_l_0;
+                break;
+            default:
+                icon = R.drawable.ic_sig_u_0;
+                break;
+            }
+            break;
+        
+        case 1:
+            switch(speed) {
+            case G:
+                icon = R.drawable.ic_sig_g_1;
+                break;
+            case _3:
+                icon = R.drawable.ic_sig_3_1;
+                break;
+            case H:
+                icon = R.drawable.ic_sig_h_1;
+                break;
+            case L:
+                icon = R.drawable.ic_sig_l_1;
+                break;
+            default:
+                icon = R.drawable.ic_sig_u_1;
+                break;
+            }
+            break;
+        case 2:
+            switch(speed) {
+            case G:
+                icon = R.drawable.ic_sig_g_2;
+                break;
+            case _3:
+                icon = R.drawable.ic_sig_3_2;
+                break;
+            case H:
+                icon = R.drawable.ic_sig_h_2;
+                break;
+            case L:
+                icon = R.drawable.ic_sig_l_2;
+                break;
+            default:
+                icon = R.drawable.ic_sig_u_2;
+                break;
+            }
+            break;
+        case 3:
+            switch(speed) {
+            case G:
+                icon = R.drawable.ic_sig_g_3;
+                break;
+            case _3:
+                icon = R.drawable.ic_sig_3_3;
+                break;
+            case H:
+                icon = R.drawable.ic_sig_h_3;
+                break;
+            case L:
+                icon = R.drawable.ic_sig_l_3;
+                break;
+            default:
+                icon = R.drawable.ic_sig_u_3;
+                break;
+            }
+            break;
+        case 4:
+            switch(speed) {
+            case G:
+                icon = R.drawable.ic_sig_g_4;
+                break;
+            case _3:
+                icon = R.drawable.ic_sig_3_4;
+                break;
+            case H:
+                icon = R.drawable.ic_sig_h_4;
+                break;
+            case L:
+                icon = R.drawable.ic_sig_l_4;
+                break;
+            default:
+                icon = R.drawable.ic_sig_u_4;
+                break;
+            }
+            break;
+        default:
+            icon = R.drawable.ic_launcher;
+            break;
         }
 
         String message = "Tethered phone bars=" + gotBars + "/4 on " + typeName;
