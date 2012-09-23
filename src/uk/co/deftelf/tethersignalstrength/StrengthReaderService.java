@@ -255,6 +255,7 @@ public class StrengthReaderService extends Service {
             typeName = "Unknown";
         }
         
+        boolean disconnected = false;
         int icon;
         switch (gotBars) {
         case 0:
@@ -354,11 +355,12 @@ public class StrengthReaderService extends Service {
             }
             break;
         default:
-            icon = R.drawable.ic_launcher;
+            icon = R.drawable.ic_sig_u_0;
+            disconnected = true;
             break;
         }
 
-        String message = "Tethered phone bars=" + gotBars + "/4 on " + typeName;
+        String message = (disconnected ? "Disconnected" : "Tethered phone bars=" + gotBars + "/4 on " + typeName);
         note.when = System.currentTimeMillis();
         note.setLatestEventInfo(this, "Tethered signal strength", message, click);
         note.icon = icon;
