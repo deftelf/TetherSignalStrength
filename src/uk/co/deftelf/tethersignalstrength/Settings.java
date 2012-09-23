@@ -59,6 +59,9 @@ public class Settings extends Activity {
 
             public void onClick(View v) {
                 
+
+                stopService(new Intent(Settings.this, StrengthReaderService.class));
+                stopService(new Intent(Settings.this, StrengthProviderService.class));
                 startService(new Intent(Settings.this, StrengthProviderService.class));
                 
                 
@@ -71,6 +74,9 @@ public class Settings extends Activity {
 
             public void onClick(View v) {
 
+
+                stopService(new Intent(Settings.this, StrengthReaderService.class));
+                stopService(new Intent(Settings.this, StrengthProviderService.class));
                 startService(new Intent(Settings.this, StrengthReaderService.class));
                 
             }

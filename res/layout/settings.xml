@@ -1,42 +1,79 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical" >
+    android:background="#FFFFFF" >
 
-    <TextView android:layout_width="wrap_content"
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Phone (device with the internet):" />
-    
-    <Button
-        android:id="@+id/startProvider"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Start provider server" />
+        android:orientation="vertical"
+        android:padding="10dp" >
 
-    <View android:layout_width="fill_parent"
-        android:layout_height="1dp"
-        />
-    
-    <TextView android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Tablet (device to tether):" />
-    
-    <Button
-        android:id="@+id/startReader"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Start reader notification" />
-    
-    <View android:layout_width="fill_parent"
-        android:layout_height="1dp"
-        />
-    
-    <Button
-        android:id="@+id/stop"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Stop" />
-    
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Phone (device with the internet):"
+            android:textColor="#999999" />
 
-</LinearLayout>
+        <Button
+            android:id="@+id/startProvider"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:text="Start provider server" />
+
+        <View
+            android:layout_width="fill_parent"
+            android:layout_height="1dp"
+            android:layout_margin="15dp"
+            android:background="@android:color/darker_gray" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Tablet (device to tether):"
+            android:textColor="#999999" />
+
+        <Button
+            android:id="@+id/startReader"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:text="Start reader notification" />
+
+        <View
+            android:layout_width="fill_parent"
+            android:layout_height="1dp"
+            android:layout_margin="15dp"
+            android:background="@android:color/darker_gray" />
+
+        <Button
+            android:id="@+id/stop"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="right"
+            android:text="Stop" />
+
+        <View
+            android:layout_width="fill_parent"
+            android:layout_height="1dp"
+            android:layout_margin="15dp"
+            android:background="@android:color/darker_gray" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="10dp"
+            android:text="Instructions: Install this app on both your phone (or the Android device with the internet connection) and the tablet (the Android device that needs an internet connection). On the phone, click 'Start provider server' and on the tablet click &apos;Start reader notification&apos;."
+            android:textColor="#555555" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="10dp"
+            android:text="Note: You need to set up tethering separately, using the phone settings"
+            android:textColor="#555555" />
+    </LinearLayout>
+
+</ScrollView>
