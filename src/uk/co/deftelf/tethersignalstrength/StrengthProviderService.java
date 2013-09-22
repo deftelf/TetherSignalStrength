@@ -74,7 +74,22 @@ public class StrengthProviderService extends Service {
             public void onSignalStrengthsChanged(SignalStrength signalStrength) {
                 super.onSignalStrengthsChanged(signalStrength);
                 Log.d("", "sig: " + signalStrength.getGsmSignalStrength());
-                bars = toBars(signalStrength.getGsmSignalStrength());
+
+                // LTE hack
+                if (networkType == TelephonyManagerCompat.NETWORK_TYPE_LTE) {
+                    try {
+                        String ssignal = signalStrength.toString();
+                        String[] parts = ssignal.split(" ");
+                        int ss = Integer.parseInt(parts[8]);
+                        bars = toBars(ss);
+                    }
+                    catch (Exception ex) {
+                        bars = -1;
+                    }
+                }
+                else {
+                    bars = toBars(signalStrength.getGsmSignalStrength());
+                }
                 
             }
             
